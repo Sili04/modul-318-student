@@ -41,13 +41,22 @@
       this.tbxStartLocation = new System.Windows.Forms.TextBox();
       this.lbZiel = new System.Windows.Forms.Label();
       this.lbStart = new System.Windows.Forms.Label();
-      this.lb = new System.Windows.Forms.ListBox();
+      this.dgv = new System.Windows.Forms.DataGridView();
+      this.Datum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.Abfahrtzeit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.Ankunftzeit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.Dauer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.Abfahrtsort = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.Kante_Abfahrtsort = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.Ankunftsort = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.Kante_Ankunftsort = new System.Windows.Forms.DataGridViewTextBoxColumn();
       ((System.ComponentModel.ISupportInitialize)(this.spContainer)).BeginInit();
       this.spContainer.Panel1.SuspendLayout();
       this.spContainer.Panel2.SuspendLayout();
       this.spContainer.SuspendLayout();
       this.gbZeitDatum.SuspendLayout();
       this.gbLocation.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
       this.SuspendLayout();
       // 
       // spContainer
@@ -71,7 +80,7 @@
       // 
       // spContainer.Panel2
       // 
-      this.spContainer.Panel2.Controls.Add(this.lb);
+      this.spContainer.Panel2.Controls.Add(this.dgv);
       this.spContainer.Size = new System.Drawing.Size(775, 432);
       this.spContainer.SplitterDistance = 93;
       this.spContainer.SplitterWidth = 3;
@@ -156,7 +165,7 @@
       this.btnAbfahrtAnkunftToggle.Name = "btnAbfahrtAnkunftToggle";
       this.btnAbfahrtAnkunftToggle.Size = new System.Drawing.Size(140, 24);
       this.btnAbfahrtAnkunftToggle.TabIndex = 0;
-      this.btnAbfahrtAnkunftToggle.Text = "Abfahrt";
+      this.btnAbfahrtAnkunftToggle.Text = "Abfahrt um";
       this.btnAbfahrtAnkunftToggle.UseVisualStyleBackColor = true;
       this.btnAbfahrtAnkunftToggle.Click += new System.EventHandler(this.btnAbfahrtAnkunftToggle_Click);
       // 
@@ -217,17 +226,72 @@
       this.lbStart.TabIndex = 0;
       this.lbStart.Text = "Start";
       // 
-      // lb
+      // dgv
       // 
-      this.lb.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+      this.dgv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.lb.FormattingEnabled = true;
-      this.lb.Location = new System.Drawing.Point(4, 4);
-      this.lb.MultiColumn = true;
-      this.lb.Name = "lb";
-      this.lb.Size = new System.Drawing.Size(771, 329);
-      this.lb.TabIndex = 0;
+      this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Datum,
+            this.Abfahrtzeit,
+            this.Ankunftzeit,
+            this.Dauer,
+            this.Abfahrtsort,
+            this.Kante_Abfahrtsort,
+            this.Ankunftsort,
+            this.Kante_Ankunftsort});
+      this.dgv.Location = new System.Drawing.Point(3, 3);
+      this.dgv.Name = "dgv";
+      this.dgv.Size = new System.Drawing.Size(772, 331);
+      this.dgv.TabIndex = 0;
+      // 
+      // Datum
+      // 
+      this.Datum.HeaderText = "Datum";
+      this.Datum.Name = "Datum";
+      this.Datum.ReadOnly = true;
+      // 
+      // Abfahrtzeit
+      // 
+      this.Abfahrtzeit.HeaderText = "Abfahrtzeit";
+      this.Abfahrtzeit.Name = "Abfahrtzeit";
+      this.Abfahrtzeit.ReadOnly = true;
+      // 
+      // Ankunftzeit
+      // 
+      this.Ankunftzeit.HeaderText = "Ankunftzeit";
+      this.Ankunftzeit.Name = "Ankunftzeit";
+      this.Ankunftzeit.ReadOnly = true;
+      // 
+      // Dauer
+      // 
+      this.Dauer.HeaderText = "Dauer";
+      this.Dauer.Name = "Dauer";
+      this.Dauer.ReadOnly = true;
+      // 
+      // Abfahrtsort
+      // 
+      this.Abfahrtsort.HeaderText = "Abfahrtsort";
+      this.Abfahrtsort.Name = "Abfahrtsort";
+      this.Abfahrtsort.ReadOnly = true;
+      // 
+      // Kante_Abfahrtsort
+      // 
+      this.Kante_Abfahrtsort.HeaderText = "Kante Abfahrtsort";
+      this.Kante_Abfahrtsort.Name = "Kante_Abfahrtsort";
+      // 
+      // Ankunftsort
+      // 
+      this.Ankunftsort.HeaderText = "Ankunftsort";
+      this.Ankunftsort.Name = "Ankunftsort";
+      this.Ankunftsort.ReadOnly = true;
+      // 
+      // Kante_Ankunftsort
+      // 
+      this.Kante_Ankunftsort.HeaderText = "Kante Ankunftsort";
+      this.Kante_Ankunftsort.Name = "Kante_Ankunftsort";
+      this.Kante_Ankunftsort.ReadOnly = true;
       // 
       // VerbindungenSuchenForm
       // 
@@ -247,6 +311,7 @@
       this.gbZeitDatum.ResumeLayout(false);
       this.gbLocation.ResumeLayout(false);
       this.gbLocation.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -266,7 +331,15 @@
     private System.Windows.Forms.Button btnSearch;
     private System.Windows.Forms.ComboBox cbSettings;
     private System.Windows.Forms.Button btnToggleView;
-    private System.Windows.Forms.ListBox lb;
+    private System.Windows.Forms.DataGridView dgv;
+    private System.Windows.Forms.DataGridViewTextBoxColumn Datum;
+    private System.Windows.Forms.DataGridViewTextBoxColumn Abfahrtzeit;
+    private System.Windows.Forms.DataGridViewTextBoxColumn Ankunftzeit;
+    private System.Windows.Forms.DataGridViewTextBoxColumn Dauer;
+    private System.Windows.Forms.DataGridViewTextBoxColumn Abfahrtsort;
+    private System.Windows.Forms.DataGridViewTextBoxColumn Kante_Abfahrtsort;
+    private System.Windows.Forms.DataGridViewTextBoxColumn Ankunftsort;
+    private System.Windows.Forms.DataGridViewTextBoxColumn Kante_Ankunftsort;
   }
 }
 

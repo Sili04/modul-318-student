@@ -14,16 +14,20 @@ namespace ST_Application
   partial class VerbindungenSuchenForm : Form
   {
     Transport transport = new Transport();
-    bool toggleView = false;
-    bool abfahrtAnkunftToggle = false;
+    bool abfahrtstafelShown = false;
+    int abfahrtAnkunftToggle = 0;
 
     public VerbindungenSuchenForm()
     {
       InitializeComponent();
+      timePicker.Text = DateTime.Now.ToString("HH:mm");
+      datePicker.Text = DateTime.Now.ToString("dd.MM.yyyy");
     }
 
     private void tbxStartLocation_TextChanged(object sender, EventArgs e)
     {
+      tbxStartLocation.BackColor = Color.White;
+      tbxZielLocation.BackColor = Color.White;
       if (tbxStartLocation.Text.Length != 0 && tbxZielLocation.Text.Length != 0)
       {
         btnSearch.Enabled = true;
@@ -39,40 +43,51 @@ namespace ST_Application
       if (tbxStartLocation.Text.Length != 0 && tbxZielLocation.Text.Length != 0)
       {
         Cursor.Current = Cursors.WaitCursor;
-        tbxStartLocation.BackColor = Color.White;
-        tbxZielLocation.BackColor = Color.White;
-        Connections connections = transport.GetConnections(tbxStartLocation.Text, tbxZielLocation.Text, 16, "2020-11-26", timePicker.Text, 2);
-        if (connections.ConnectionList.Count != 0)
+        DateTime dateTime = DateTime.Parse(datePicker.Text);
+        try
         {
-          UpdateData(connections);
+          Connections connections = transport.GetConnections(tbxStartLocation.Text, tbxZielLocation.Text, 16, dateTime.ToString("yyyy-MM-dd"), timePicker.Text, abfahrtAnkunftToggle);
+          if (connections.ConnectionList.Count != 0)
+          {
+            UpdateData(connections);
+          }
+          else
+          {
+            ErrorMessage();
+          }
         }
-        else
+        catch (Exception)
         {
-          tbxStartLocation.BackColor = Color.Red;
-          tbxZielLocation.BackColor = Color.Red;
-          tbxStartLocation.Text = "";
-          tbxZielLocation.Text = "";
+          ErrorMessage();
         }
         Cursor.Current = Cursors.Default;
       }
     }
 
+    private void ErrorMessage()
+    {
+      tbxStartLocation.Text = "";
+      tbxZielLocation.Text = "";
+      tbxStartLocation.BackColor = Color.Red;
+      tbxZielLocation.BackColor = Color.Red;
+    }
+
     private void UpdateData(Connections connections)
     {
-      lb.Items.Clear();
+      dgv.Rows.Clear();
       foreach (Connection connection in connections.ConnectionList)
       {
         TimeSpan duration = TimeSpan.Parse(connection.Duration.Replace("d", ":"));
-        String connectionInformations = "Zeit: " + DateTime.Parse(connection.From.Departure).ToString("HH:mm") + " - " + DateTime.Parse(connection.To.Arrival).ToString("HH:mm") + "\t\tDauer: " + duration.ToString(@"hh\:mm") + "\t\tVon: " + connection.From.Station.Name + "\t Kante: " + connection.From.Platform + "\t\t Nach: " + connection.To.Station.Name + "\t Gleis: " + connection.To.Platform;
-        lb.Items.Add(connectionInformations);
+        dgv.Rows.Add(new[] { DateTime.Parse(connection.From.Departure).ToString("dd.MM.yyyy"), DateTime.Parse(connection.From.Departure).ToString("HH:mm"), DateTime.Parse(connection.To.Arrival).ToString("HH:mm"), duration.ToString(@"hh\:mm"), connection.From.Station.Name, connection.From.Platform, connection.To.Station.Name, connection.To.Platform });
       }
     }
 
     private void btnToggleView_Click(object sender, EventArgs e)
     {
-      toggleView = !toggleView;
-      if (toggleView)
+      abfahrtstafelShown = !abfahrtstafelShown;
+      if (abfahrtstafelShown)
       {
+        this.Text = "ÖV finder - Abfahrtstafel";
         btnToggleView.Text = "Verbindungen suchen";
         tbxZielLocation.Enabled = false;
         btnAbfahrtAnkunftToggle.Enabled = false;
@@ -80,6 +95,7 @@ namespace ST_Application
       }
       else
       {
+        this.Text = "ÖV finder - Verbindungen suchen";
         btnToggleView.Text = "Abfahrtstafel";
         tbxZielLocation.Enabled = true;
         btnAbfahrtAnkunftToggle.Enabled = true;
@@ -88,7 +104,16 @@ namespace ST_Application
 
     private void btnAbfahrtAnkunftToggle_Click(object sender, EventArgs e)
     {
-      abfahrtAnkunftToggle = !abfahrtAnkunftToggle;
+      if (abfahrtAnkunftToggle == 0)
+      {
+        abfahrtAnkunftToggle = 1;
+        btnAbfahrtAnkunftToggle.Text = "Ankunft um";
+      }
+      else
+      {
+        abfahrtAnkunftToggle = 0;
+        btnAbfahrtAnkunftToggle.Text = "Abfahrt um";
+      }
     }
   }
 }
