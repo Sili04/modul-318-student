@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -178,13 +179,61 @@ namespace ST_Application
     private void tbxStartLocation_TextChanged(object sender, EventArgs e)
     {
       tbxStartLocation.AutoCompleteCustomSource = GenerateAutocompleteSource(tbxStartLocation.Text);
+      if (tbxStartLocation.Text.Length != 0)
+      {
+        btnMapStartStation.Enabled = true;
+      }
+      else
+      {
+        btnMapStartStation.Enabled = false;
+      }
       tbxLocationChanged();
     }
 
     private void tbxZielLocation_TextChanged(object sender, EventArgs e)
     {
       tbxZielLocation.AutoCompleteCustomSource = GenerateAutocompleteSource(tbxZielLocation.Text);
+      if (tbxZielLocation.Text.Length != 0)
+      {
+        btnMapZielStation.Enabled = true;
+      }
+      else
+      {
+        btnMapZielStation.Enabled = false;
+      }
       tbxLocationChanged();
+    }
+
+    private void btnMapStartStation_Click(object sender, EventArgs e)
+    {
+      OpenStationOnMap(tbxStartLocation.Text);
+    }
+
+    private void btnMapZielStation_Click(object sender, EventArgs e)
+    {
+      OpenStationOnMap(tbxZielLocation.Text);
+    }
+
+    private void OpenStationOnMap(string station)
+    {
+      Stations stations = transport.GetStations(station);
+      if (stations.StationList.Count != 0)
+      {
+        string locationFormatted = stations.StationList[0].Name.Replace("/", " ");
+        Process.Start("https://www.google.com/maps/search/" + locationFormatted);
+      }
+    }
+
+    private void OpenDirectionOnMap(string startLocation, string endLocation)
+    {
+      Stations startStations = transport.GetStations(startLocation);
+      Stations endStations = transport.GetStations(endLocation);
+      if (startStations.StationList.Count != 0 && endStations.StationList.Count != 0)
+      {
+        string startLocationFormatted = startStations.StationList[0].Name.Replace("/", " ");
+        string endLocationFormatted = endStations.StationList[0].Name.Replace("/", " ");
+        Process.Start("https://www.google.com/maps/dir/" + startLocationFormatted + "/" + endLocationFormatted);
+      }
     }
   }
 }

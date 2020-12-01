@@ -37,6 +37,8 @@
       this.timePicker = new System.Windows.Forms.DateTimePicker();
       this.btnAbfahrtAnkunftToggle = new System.Windows.Forms.Button();
       this.gbLocation = new System.Windows.Forms.GroupBox();
+      this.btnMapZielStation = new System.Windows.Forms.Button();
+      this.btnMapStartStation = new System.Windows.Forms.Button();
       this.tbxZielLocation = new System.Windows.Forms.TextBox();
       this.tbxStartLocation = new System.Windows.Forms.TextBox();
       this.lbZiel = new System.Windows.Forms.Label();
@@ -173,6 +175,8 @@
       // 
       this.gbLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+      this.gbLocation.Controls.Add(this.btnMapZielStation);
+      this.gbLocation.Controls.Add(this.btnMapStartStation);
       this.gbLocation.Controls.Add(this.tbxZielLocation);
       this.gbLocation.Controls.Add(this.tbxStartLocation);
       this.gbLocation.Controls.Add(this.lbZiel);
@@ -181,10 +185,32 @@
       this.gbLocation.Margin = new System.Windows.Forms.Padding(2);
       this.gbLocation.Name = "gbLocation";
       this.gbLocation.Padding = new System.Windows.Forms.Padding(2);
-      this.gbLocation.Size = new System.Drawing.Size(162, 74);
+      this.gbLocation.Size = new System.Drawing.Size(186, 74);
       this.gbLocation.TabIndex = 0;
       this.gbLocation.TabStop = false;
       this.gbLocation.Text = "Ort";
+      // 
+      // btnMapZielStation
+      // 
+      this.btnMapZielStation.Enabled = false;
+      this.btnMapZielStation.Location = new System.Drawing.Point(150, 38);
+      this.btnMapZielStation.Name = "btnMapZielStation";
+      this.btnMapZielStation.Size = new System.Drawing.Size(25, 23);
+      this.btnMapZielStation.TabIndex = 5;
+      this.btnMapZielStation.Text = "M";
+      this.btnMapZielStation.UseVisualStyleBackColor = true;
+      this.btnMapZielStation.Click += new System.EventHandler(this.btnMapZielStation_Click);
+      // 
+      // btnMapStartStation
+      // 
+      this.btnMapStartStation.Enabled = false;
+      this.btnMapStartStation.Location = new System.Drawing.Point(150, 20);
+      this.btnMapStartStation.Name = "btnMapStartStation";
+      this.btnMapStartStation.Size = new System.Drawing.Size(25, 23);
+      this.btnMapStartStation.TabIndex = 4;
+      this.btnMapStartStation.Text = "M";
+      this.btnMapStartStation.UseVisualStyleBackColor = true;
+      this.btnMapStartStation.Click += new System.EventHandler(this.btnMapStartStation_Click);
       // 
       // tbxZielLocation
       // 
@@ -247,7 +273,7 @@
             this.Kante_Ankunftsort});
       this.dgv.Location = new System.Drawing.Point(3, 3);
       this.dgv.Name = "dgv";
-      this.dgv.Size = new System.Drawing.Size(833, 353);
+      this.dgv.Size = new System.Drawing.Size(833, 349);
       this.dgv.TabIndex = 0;
       // 
       // Datum
@@ -344,6 +370,8 @@
     private System.Windows.Forms.DataGridViewTextBoxColumn Kante_Abfahrtsort;
     private System.Windows.Forms.DataGridViewTextBoxColumn Ankunftsort;
     private System.Windows.Forms.DataGridViewTextBoxColumn Kante_Ankunftsort;
+    private System.Windows.Forms.Button btnMapZielStation;
+    private System.Windows.Forms.Button btnMapStartStation;
   }
 }
 
