@@ -28,11 +28,14 @@ namespace ST_Application
     {
       tbxStartLocation.BackColor = Color.White;
       tbxZielLocation.BackColor = Color.White;
-      if (tbxStartLocation.Text.Length != 0 && tbxZielLocation.Text.Length != 0)
+      if (tbxStartLocation.Text.Length != 0 && tbxZielLocation.Text.Length != 0 && !abfahrtstafelShown)
       {
         btnSearch.Enabled = true;
       }
-      else
+      else if (abfahrtstafelShown && tbxStartLocation.Text.Length != 0)
+      {
+        btnSearch.Enabled = true;
+      } else
       {
         btnSearch.Enabled = false;
       }
@@ -40,20 +43,34 @@ namespace ST_Application
 
     private void btnSearch_Click(object sender, EventArgs e)
     {
-      if (tbxStartLocation.Text.Length != 0 && tbxZielLocation.Text.Length != 0)
+      if (tbxStartLocation.Text.Length != 0)
       {
         Cursor.Current = Cursors.WaitCursor;
         DateTime dateTime = DateTime.Parse(datePicker.Text);
         try
         {
-          Connections connections = transport.GetConnections(tbxStartLocation.Text, tbxZielLocation.Text, 16, dateTime.ToString("yyyy-MM-dd"), timePicker.Text, abfahrtAnkunftToggle);
-          if (connections.ConnectionList.Count != 0)
+          if (!abfahrtstafelShown && tbxZielLocation.Text.Length != 0)
           {
-            UpdateData(connections);
-          }
-          else
+            Connections connections = transport.GetConnections(tbxStartLocation.Text, tbxZielLocation.Text, 16, dateTime.ToString("yyyy-MM-dd"), timePicker.Text, abfahrtAnkunftToggle);
+            if (connections.ConnectionList.Count != 0)
+            {
+              UpdateConnectionData(connections);
+            }
+            else
+            {
+              ErrorMessage();
+            }
+          } else if (abfahrtstafelShown)
           {
-            ErrorMessage();
+            StationBoardRoot stationBoardRoot = transport.GetStationBoard(tbxStartLocation.Text, "0");
+            if (stationBoardRoot.Entries.Count != 0)
+            {
+              UpdateStationBoardData(stationBoardRoot);
+            }
+            else
+            {
+              ErrorMessage();
+            }
           }
         }
         catch (Exception)
@@ -72,13 +89,38 @@ namespace ST_Application
       tbxZielLocation.BackColor = Color.Red;
     }
 
-    private void UpdateData(Connections connections)
+    private void UpdateConnectionData(Connections connections)
     {
       dgv.Rows.Clear();
+      dgv.Columns.Clear();
+      dgv.Columns.Add("Datum", "Datum");
+      dgv.Columns.Add("Abfahrtzeit", "Abfahrtzeit");
+      dgv.Columns.Add("Ankunftzeit", "Ankunftzeit");
+      dgv.Columns.Add("Dauer", "Dauer");
+      dgv.Columns.Add("Abfahrtsort", "Abfahrtsort");
+      dgv.Columns.Add("Kante Abfahrtsort", "Kante AbfahrtsortAbfahrtsort");
+      dgv.Columns.Add("Ankunftsort", "Ankunftsort");
+      dgv.Columns.Add("Kante Ankunftsort", "Kante Ankunftsort");
+
       foreach (Connection connection in connections.ConnectionList)
       {
         TimeSpan duration = TimeSpan.Parse(connection.Duration.Replace("d", ":"));
         dgv.Rows.Add(new[] { DateTime.Parse(connection.From.Departure).ToString("dd.MM.yyyy"), DateTime.Parse(connection.From.Departure).ToString("HH:mm"), DateTime.Parse(connection.To.Arrival).ToString("HH:mm"), duration.ToString(@"hh\:mm"), connection.From.Station.Name, connection.From.Platform, connection.To.Station.Name, connection.To.Platform });
+      }
+    }
+
+    private void UpdateStationBoardData(StationBoardRoot stationBoardRoot)
+    {
+      dgv.Rows.Clear();
+      dgv.Columns.Clear();
+      dgv.Columns.Add("Datum", "Datum"); 
+      dgv.Columns.Add("Abfahrtzeit", "Abfahrtzeit");
+      dgv.Columns.Add("Abfahrtsort", "Abfahrtsort");
+      dgv.Columns.Add("Richtung", "Richtung");
+      dgv.Columns.Add("Linie", "Linie");
+      foreach (StationBoard stationBoard in stationBoardRoot.Entries)
+      {
+        dgv.Rows.Add(new[] { stationBoard.Stop.Departure.ToString("dd.MM.yyyy"), stationBoard.Stop.Departure.ToString("HH:mm"), stationBoardRoot.Station.Name, stationBoard.To, stationBoard.Name});
       }
     }
 

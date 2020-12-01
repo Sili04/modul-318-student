@@ -81,15 +81,15 @@
       // spContainer.Panel2
       // 
       this.spContainer.Panel2.Controls.Add(this.dgv);
-      this.spContainer.Size = new System.Drawing.Size(775, 432);
-      this.spContainer.SplitterDistance = 93;
+      this.spContainer.Size = new System.Drawing.Size(836, 449);
+      this.spContainer.SplitterDistance = 96;
       this.spContainer.SplitterWidth = 3;
       this.spContainer.TabIndex = 0;
       // 
       // btnToggleView
       // 
       this.btnToggleView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.btnToggleView.Location = new System.Drawing.Point(608, 11);
+      this.btnToggleView.Location = new System.Drawing.Point(669, 11);
       this.btnToggleView.Name = "btnToggleView";
       this.btnToggleView.Size = new System.Drawing.Size(156, 23);
       this.btnToggleView.TabIndex = 7;
@@ -101,7 +101,7 @@
       // 
       this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.btnSearch.Enabled = false;
-      this.btnSearch.Location = new System.Drawing.Point(650, 52);
+      this.btnSearch.Location = new System.Drawing.Point(711, 55);
       this.btnSearch.Margin = new System.Windows.Forms.Padding(2);
       this.btnSearch.Name = "btnSearch";
       this.btnSearch.Size = new System.Drawing.Size(117, 34);
@@ -115,7 +115,7 @@
       this.cbSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.cbSettings.FormattingEnabled = true;
-      this.cbSettings.Location = new System.Drawing.Point(397, 32);
+      this.cbSettings.Location = new System.Drawing.Point(458, 32);
       this.cbSettings.Margin = new System.Windows.Forms.Padding(2);
       this.cbSettings.Name = "cbSettings";
       this.cbSettings.Size = new System.Drawing.Size(102, 21);
@@ -128,11 +128,11 @@
       this.gbZeitDatum.Controls.Add(this.datePicker);
       this.gbZeitDatum.Controls.Add(this.timePicker);
       this.gbZeitDatum.Controls.Add(this.btnAbfahrtAnkunftToggle);
-      this.gbZeitDatum.Location = new System.Drawing.Point(180, 10);
+      this.gbZeitDatum.Location = new System.Drawing.Point(211, 10);
       this.gbZeitDatum.Margin = new System.Windows.Forms.Padding(2);
       this.gbZeitDatum.Name = "gbZeitDatum";
       this.gbZeitDatum.Padding = new System.Windows.Forms.Padding(2);
-      this.gbZeitDatum.Size = new System.Drawing.Size(184, 71);
+      this.gbZeitDatum.Size = new System.Drawing.Size(184, 74);
       this.gbZeitDatum.TabIndex = 4;
       this.gbZeitDatum.TabStop = false;
       this.gbZeitDatum.Text = "Zeit/Datum";
@@ -181,7 +181,7 @@
       this.gbLocation.Margin = new System.Windows.Forms.Padding(2);
       this.gbLocation.Name = "gbLocation";
       this.gbLocation.Padding = new System.Windows.Forms.Padding(2);
-      this.gbLocation.Size = new System.Drawing.Size(162, 71);
+      this.gbLocation.Size = new System.Drawing.Size(162, 74);
       this.gbLocation.TabIndex = 0;
       this.gbLocation.TabStop = false;
       this.gbLocation.Text = "Ort";
@@ -243,7 +243,7 @@
             this.Kante_Ankunftsort});
       this.dgv.Location = new System.Drawing.Point(3, 3);
       this.dgv.Name = "dgv";
-      this.dgv.Size = new System.Drawing.Size(772, 331);
+      this.dgv.Size = new System.Drawing.Size(833, 346);
       this.dgv.TabIndex = 0;
       // 
       // Datum
@@ -298,7 +298,7 @@
       this.AcceptButton = this.btnSearch;
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(774, 430);
+      this.ClientSize = new System.Drawing.Size(835, 447);
       this.Controls.Add(this.spContainer);
       this.Margin = new System.Windows.Forms.Padding(2);
       this.MinimumSize = new System.Drawing.Size(79, 89);
