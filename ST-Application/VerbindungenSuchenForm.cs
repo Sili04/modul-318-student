@@ -44,16 +44,13 @@ namespace ST_Application
       }
     }
 
-    private AutoCompleteStringCollection GenerateAutocompleteSource(string query)
+    private List<String> GenerateAutocompleteSource(string query)
     {
-      AutoCompleteStringCollection source = new AutoCompleteStringCollection();
+      List<string> source = new List<string>();
       Stations stations = transport.GetStations(query);
-      if (query.Length > 2)
+      foreach (Station station in stations.StationList)
       {
-        foreach (Station station in stations.StationList)
-        {
-          source.Add(station.Name);
-        }
+        source.Add(station.Name);
       }
 
       return source;
@@ -177,9 +174,13 @@ namespace ST_Application
       }
     }
 
-    private void tbxStartLocation_TextChanged(object sender, EventArgs e)
+    private void tbxStartLocation_TextChanged(object sender, KeyEventArgs e)
     {
-      tbxStartLocation.AutoCompleteCustomSource = GenerateAutocompleteSource(tbxStartLocation.Text);
+      if (e.KeyCode != Keys.Down && e.KeyCode != Keys.Up && e.KeyCode != Keys.Enter)
+      {
+        UpdateIntellisenseForStartLocation();
+      }
+
       if (tbxStartLocation.Text.Length != 0)
       {
         btnMapStartStation.Enabled = true;
@@ -191,9 +192,30 @@ namespace ST_Application
       tbxLocationChanged();
     }
 
-    private void tbxZielLocation_TextChanged(object sender, EventArgs e)
+    private void UpdateIntellisenseForStartLocation()
     {
-      tbxZielLocation.AutoCompleteCustomSource = GenerateAutocompleteSource(tbxZielLocation.Text);
+      while (tbxStartLocation.Items.Count > 0)
+      {
+        tbxStartLocation.Items.RemoveAt(0);
+      }
+      List<string> stations = GenerateAutocompleteSource(tbxStartLocation.Text);
+      foreach (String station in stations)
+      {
+        if (station != null)
+        {
+          tbxStartLocation.Items.Add(station);
+        }
+      }
+      tbxStartLocation.DroppedDown = true;
+    }
+
+    private void tbxZielLocation_TextChanged(object sender, KeyEventArgs e)
+    {
+      if (e.KeyCode != Keys.Down && e.KeyCode != Keys.Up && e.KeyCode != Keys.Enter)
+      {
+        UpdateIntellisenceForZielLocation();
+      }
+
       if (tbxZielLocation.Text.Length != 0)
       {
         btnMapZielStation.Enabled = true;
@@ -203,6 +225,23 @@ namespace ST_Application
         btnMapZielStation.Enabled = false;
       }
       tbxLocationChanged();
+    }
+
+    private void UpdateIntellisenceForZielLocation()
+    {
+      while (tbxZielLocation.Items.Count > 0)
+      {
+        tbxZielLocation.Items.RemoveAt(0);
+      }
+      List<string> stations = GenerateAutocompleteSource(tbxStartLocation.Text);
+      foreach (String station in GenerateAutocompleteSource(tbxZielLocation.Text))
+      {
+        if (station != null)
+        {
+          tbxZielLocation.Items.Add(station);
+        }
+      }
+      tbxZielLocation.DroppedDown = true;
     }
 
     private void btnMapStartStation_Click(object sender, EventArgs e)
@@ -225,20 +264,9 @@ namespace ST_Application
       Stations stations = transport.GetStations(station);
       if (stations.StationList.Count != 0)
       {
-        string locationFormatted = stations.StationList[0].Name.Replace("/", " ");
-        Process.Start("https://www.google.com/maps/search/" + locationFormatted);
-      }
-    }
-
-    private void OpenDirectionOnMap(string startLocation, string endLocation)
-    {
-      Stations startStations = transport.GetStations(startLocation);
-      Stations endStations = transport.GetStations(endLocation);
-      if (startStations.StationList.Count != 0 && endStations.StationList.Count != 0)
-      {
-        string startLocationFormatted = startStations.StationList[0].Name.Replace("/", " ");
-        string endLocationFormatted = endStations.StationList[0].Name.Replace("/", " ");
-        Process.Start("https://www.google.com/maps/dir/" + startLocationFormatted + "/" + endLocationFormatted);
+        string XCoordinate = stations.StationList[0].Coordinate.XCoordinate.ToString().Replace(',', '.');
+        string YCoordinate = stations.StationList[0].Coordinate.YCoordinate.ToString().Replace(',', '.');
+        Process.Start("https://www.google.com/maps/search/" + XCoordinate + "," + YCoordinate);
       }
     }
 
@@ -277,6 +305,11 @@ namespace ST_Application
       {
         btnSendEmail.Enabled = false;
       }
+    }
+
+    private void btnShowMap_Click(object sender, EventArgs e)
+    {
+      Process.Start("https://www.google.com/maps/");
     }
   }
 }

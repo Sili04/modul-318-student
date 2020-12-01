@@ -29,20 +29,22 @@
     private void InitializeComponent()
     {
       this.spContainer = new System.Windows.Forms.SplitContainer();
+      this.gbSonstiges = new System.Windows.Forms.GroupBox();
+      this.btnShowMap = new System.Windows.Forms.Button();
+      this.cbSettings = new System.Windows.Forms.ComboBox();
       this.tbxMail = new System.Windows.Forms.TextBox();
       this.btnSendEmail = new System.Windows.Forms.Button();
       this.btnToggleView = new System.Windows.Forms.Button();
       this.btnSearch = new System.Windows.Forms.Button();
-      this.cbSettings = new System.Windows.Forms.ComboBox();
       this.gbZeitDatum = new System.Windows.Forms.GroupBox();
       this.datePicker = new System.Windows.Forms.DateTimePicker();
       this.timePicker = new System.Windows.Forms.DateTimePicker();
       this.btnAbfahrtAnkunftToggle = new System.Windows.Forms.Button();
       this.gbLocation = new System.Windows.Forms.GroupBox();
+      this.tbxZielLocation = new System.Windows.Forms.ComboBox();
+      this.tbxStartLocation = new System.Windows.Forms.ComboBox();
       this.btnMapZielStation = new System.Windows.Forms.Button();
       this.btnMapStartStation = new System.Windows.Forms.Button();
-      this.tbxZielLocation = new System.Windows.Forms.TextBox();
-      this.tbxStartLocation = new System.Windows.Forms.TextBox();
       this.lbZiel = new System.Windows.Forms.Label();
       this.lbStart = new System.Windows.Forms.Label();
       this.dgv = new System.Windows.Forms.DataGridView();
@@ -54,15 +56,14 @@
       this.Kante_Abfahrtsort = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.Ankunftsort = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.Kante_Ankunftsort = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.gbSonstiges = new System.Windows.Forms.GroupBox();
       ((System.ComponentModel.ISupportInitialize)(this.spContainer)).BeginInit();
       this.spContainer.Panel1.SuspendLayout();
       this.spContainer.Panel2.SuspendLayout();
       this.spContainer.SuspendLayout();
+      this.gbSonstiges.SuspendLayout();
       this.gbZeitDatum.SuspendLayout();
       this.gbLocation.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
-      this.gbSonstiges.SuspendLayout();
       this.SuspendLayout();
       // 
       // spContainer
@@ -91,6 +92,43 @@
       this.spContainer.SplitterDistance = 96;
       this.spContainer.SplitterWidth = 3;
       this.spContainer.TabIndex = 0;
+      // 
+      // gbSonstiges
+      // 
+      this.gbSonstiges.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.gbSonstiges.Controls.Add(this.btnShowMap);
+      this.gbSonstiges.Controls.Add(this.cbSettings);
+      this.gbSonstiges.Controls.Add(this.tbxMail);
+      this.gbSonstiges.Controls.Add(this.btnSendEmail);
+      this.gbSonstiges.Location = new System.Drawing.Point(412, 12);
+      this.gbSonstiges.Name = "gbSonstiges";
+      this.gbSonstiges.Size = new System.Drawing.Size(251, 71);
+      this.gbSonstiges.TabIndex = 10;
+      this.gbSonstiges.TabStop = false;
+      this.gbSonstiges.Text = "Sonstiges";
+      // 
+      // btnShowMap
+      // 
+      this.btnShowMap.Location = new System.Drawing.Point(117, 14);
+      this.btnShowMap.Name = "btnShowMap";
+      this.btnShowMap.Size = new System.Drawing.Size(127, 23);
+      this.btnShowMap.TabIndex = 10;
+      this.btnShowMap.Text = "Map öffnen";
+      this.btnShowMap.UseVisualStyleBackColor = true;
+      this.btnShowMap.Click += new System.EventHandler(this.btnShowMap_Click);
+      // 
+      // cbSettings
+      // 
+      this.cbSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.cbSettings.FormattingEnabled = true;
+      this.cbSettings.Location = new System.Drawing.Point(6, 19);
+      this.cbSettings.Margin = new System.Windows.Forms.Padding(2);
+      this.cbSettings.Name = "cbSettings";
+      this.cbSettings.Size = new System.Drawing.Size(85, 21);
+      this.cbSettings.TabIndex = 5;
+      this.cbSettings.Text = "Settings";
       // 
       // tbxMail
       // 
@@ -140,18 +178,6 @@
       this.btnSearch.Text = "Search";
       this.btnSearch.UseVisualStyleBackColor = true;
       this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-      // 
-      // cbSettings
-      // 
-      this.cbSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.cbSettings.FormattingEnabled = true;
-      this.cbSettings.Location = new System.Drawing.Point(73, 18);
-      this.cbSettings.Margin = new System.Windows.Forms.Padding(2);
-      this.cbSettings.Name = "cbSettings";
-      this.cbSettings.Size = new System.Drawing.Size(102, 21);
-      this.cbSettings.TabIndex = 5;
-      this.cbSettings.Text = "Settings";
       // 
       // gbZeitDatum
       // 
@@ -204,10 +230,10 @@
       // 
       this.gbLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-      this.gbLocation.Controls.Add(this.btnMapZielStation);
-      this.gbLocation.Controls.Add(this.btnMapStartStation);
       this.gbLocation.Controls.Add(this.tbxZielLocation);
       this.gbLocation.Controls.Add(this.tbxStartLocation);
+      this.gbLocation.Controls.Add(this.btnMapZielStation);
+      this.gbLocation.Controls.Add(this.btnMapStartStation);
       this.gbLocation.Controls.Add(this.lbZiel);
       this.gbLocation.Controls.Add(this.lbStart);
       this.gbLocation.Location = new System.Drawing.Point(11, 10);
@@ -218,6 +244,26 @@
       this.gbLocation.TabIndex = 0;
       this.gbLocation.TabStop = false;
       this.gbLocation.Text = "Ort";
+      // 
+      // tbxZielLocation
+      // 
+      this.tbxZielLocation.FormattingEnabled = true;
+      this.tbxZielLocation.Location = new System.Drawing.Point(46, 43);
+      this.tbxZielLocation.Name = "tbxZielLocation";
+      this.tbxZielLocation.Size = new System.Drawing.Size(98, 21);
+      this.tbxZielLocation.TabIndex = 7;
+      this.tbxZielLocation.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxZielLocation_TextChanged);
+      // 
+      // tbxStartLocation
+      // 
+      this.tbxStartLocation.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+      this.tbxStartLocation.FormattingEnabled = true;
+      this.tbxStartLocation.Location = new System.Drawing.Point(46, 21);
+      this.tbxStartLocation.Name = "tbxStartLocation";
+      this.tbxStartLocation.Size = new System.Drawing.Size(99, 21);
+      this.tbxStartLocation.TabIndex = 6;
+      this.tbxStartLocation.UseWaitCursor = true;
+      this.tbxStartLocation.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxStartLocation_TextChanged);
       // 
       // btnMapZielStation
       // 
@@ -241,30 +287,6 @@
       this.btnMapStartStation.UseVisualStyleBackColor = true;
       this.btnMapStartStation.Click += new System.EventHandler(this.btnMapStartStation_Click);
       // 
-      // tbxZielLocation
-      // 
-      this.tbxZielLocation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-      this.tbxZielLocation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-      this.tbxZielLocation.Location = new System.Drawing.Point(46, 40);
-      this.tbxZielLocation.Margin = new System.Windows.Forms.Padding(2);
-      this.tbxZielLocation.Name = "tbxZielLocation";
-      this.tbxZielLocation.Size = new System.Drawing.Size(99, 20);
-      this.tbxZielLocation.TabIndex = 3;
-      this.tbxZielLocation.Tag = "";
-      this.tbxZielLocation.TextChanged += new System.EventHandler(this.tbxZielLocation_TextChanged);
-      // 
-      // tbxStartLocation
-      // 
-      this.tbxStartLocation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-      this.tbxStartLocation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-      this.tbxStartLocation.Location = new System.Drawing.Point(46, 20);
-      this.tbxStartLocation.Margin = new System.Windows.Forms.Padding(2);
-      this.tbxStartLocation.Name = "tbxStartLocation";
-      this.tbxStartLocation.Size = new System.Drawing.Size(99, 20);
-      this.tbxStartLocation.TabIndex = 2;
-      this.tbxStartLocation.Tag = "";
-      this.tbxStartLocation.TextChanged += new System.EventHandler(this.tbxStartLocation_TextChanged);
-      // 
       // lbZiel
       // 
       this.lbZiel.AutoSize = true;
@@ -287,9 +309,12 @@
       // 
       // dgv
       // 
+      this.dgv.AllowUserToAddRows = false;
+      this.dgv.AllowUserToDeleteRows = false;
       this.dgv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+      this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
       this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Datum,
@@ -302,7 +327,7 @@
             this.Kante_Ankunftsort});
       this.dgv.Location = new System.Drawing.Point(3, 3);
       this.dgv.Name = "dgv";
-      this.dgv.Size = new System.Drawing.Size(833, 357);
+      this.dgv.Size = new System.Drawing.Size(833, 351);
       this.dgv.TabIndex = 0;
       this.dgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellClick);
       this.dgv.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellContentClick);
@@ -354,18 +379,6 @@
       this.Kante_Ankunftsort.Name = "Kante_Ankunftsort";
       this.Kante_Ankunftsort.ReadOnly = true;
       // 
-      // gbSonstiges
-      // 
-      this.gbSonstiges.Controls.Add(this.cbSettings);
-      this.gbSonstiges.Controls.Add(this.tbxMail);
-      this.gbSonstiges.Controls.Add(this.btnSendEmail);
-      this.gbSonstiges.Location = new System.Drawing.Point(412, 12);
-      this.gbSonstiges.Name = "gbSonstiges";
-      this.gbSonstiges.Size = new System.Drawing.Size(251, 71);
-      this.gbSonstiges.TabIndex = 10;
-      this.gbSonstiges.TabStop = false;
-      this.gbSonstiges.Text = "Sonstiges";
-      // 
       // VerbindungenSuchenForm
       // 
       this.AcceptButton = this.btnSearch;
@@ -381,12 +394,12 @@
       this.spContainer.Panel2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.spContainer)).EndInit();
       this.spContainer.ResumeLayout(false);
+      this.gbSonstiges.ResumeLayout(false);
+      this.gbSonstiges.PerformLayout();
       this.gbZeitDatum.ResumeLayout(false);
       this.gbLocation.ResumeLayout(false);
       this.gbLocation.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
-      this.gbSonstiges.ResumeLayout(false);
-      this.gbSonstiges.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -395,13 +408,11 @@
 
     private System.Windows.Forms.SplitContainer spContainer;
     private System.Windows.Forms.GroupBox gbLocation;
-    private System.Windows.Forms.TextBox tbxStartLocation;
     private System.Windows.Forms.Label lbZiel;
     private System.Windows.Forms.Label lbStart;
     private System.Windows.Forms.GroupBox gbZeitDatum;
     private System.Windows.Forms.DateTimePicker timePicker;
     private System.Windows.Forms.Button btnAbfahrtAnkunftToggle;
-    private System.Windows.Forms.TextBox tbxZielLocation;
     private System.Windows.Forms.DateTimePicker datePicker;
     private System.Windows.Forms.Button btnSearch;
     private System.Windows.Forms.ComboBox cbSettings;
@@ -420,6 +431,9 @@
     private System.Windows.Forms.Button btnSendEmail;
     private System.Windows.Forms.TextBox tbxMail;
     private System.Windows.Forms.GroupBox gbSonstiges;
+    private System.Windows.Forms.Button btnShowMap;
+    private System.Windows.Forms.ComboBox tbxStartLocation;
+    private System.Windows.Forms.ComboBox tbxZielLocation;
   }
 }
 
