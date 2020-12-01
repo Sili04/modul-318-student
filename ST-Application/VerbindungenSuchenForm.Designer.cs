@@ -188,20 +188,24 @@
       // 
       // tbxZielLocation
       // 
-      this.tbxZielLocation.Location = new System.Drawing.Point(46, 41);
+      this.tbxZielLocation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+      this.tbxZielLocation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+      this.tbxZielLocation.Location = new System.Drawing.Point(46, 40);
       this.tbxZielLocation.Margin = new System.Windows.Forms.Padding(2);
       this.tbxZielLocation.Name = "tbxZielLocation";
-      this.tbxZielLocation.Size = new System.Drawing.Size(76, 20);
+      this.tbxZielLocation.Size = new System.Drawing.Size(99, 20);
       this.tbxZielLocation.TabIndex = 3;
       this.tbxZielLocation.Tag = "";
-      this.tbxZielLocation.TextChanged += new System.EventHandler(this.tbxStartLocation_TextChanged);
+      this.tbxZielLocation.TextChanged += new System.EventHandler(this.tbxZielLocation_TextChanged);
       // 
       // tbxStartLocation
       // 
+      this.tbxStartLocation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+      this.tbxStartLocation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
       this.tbxStartLocation.Location = new System.Drawing.Point(46, 20);
       this.tbxStartLocation.Margin = new System.Windows.Forms.Padding(2);
       this.tbxStartLocation.Name = "tbxStartLocation";
-      this.tbxStartLocation.Size = new System.Drawing.Size(76, 20);
+      this.tbxStartLocation.Size = new System.Drawing.Size(99, 20);
       this.tbxStartLocation.TabIndex = 2;
       this.tbxStartLocation.Tag = "";
       this.tbxStartLocation.TextChanged += new System.EventHandler(this.tbxStartLocation_TextChanged);
@@ -243,7 +247,7 @@
             this.Kante_Ankunftsort});
       this.dgv.Location = new System.Drawing.Point(3, 3);
       this.dgv.Name = "dgv";
-      this.dgv.Size = new System.Drawing.Size(833, 346);
+      this.dgv.Size = new System.Drawing.Size(833, 353);
       this.dgv.TabIndex = 0;
       // 
       // Datum

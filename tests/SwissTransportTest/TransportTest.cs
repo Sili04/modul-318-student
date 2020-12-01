@@ -21,7 +21,7 @@ namespace SwissTransport
         public void StationBoard()
         {
             testee = new Transport();
-            var stationBoard = testee.GetStationBoard("Sursee", "8502007");
+            var stationBoard = testee.GetStationBoard("Sursee", "8502007", DateTime.Now.ToString("dd.MM.yyyy HH:mm"));
 
             Assert.IsNotNull(stationBoard);
         }

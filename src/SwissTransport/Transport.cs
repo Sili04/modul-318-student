@@ -27,7 +27,6 @@ namespace SwissTransport
 
         public StationBoardRoot GetStationBoard(string station, string id, string datetime)
         {
-            Console.WriteLine("HIER------------>>" + datetime);
             station = System.Uri.EscapeDataString(station);
             id = System.Uri.EscapeDataString(id);
             var request = CreateWebRequest("http://transport.opendata.ch/v1/stationboard?station=" + station + "&id=" + id + "&datetime=" + datetime);

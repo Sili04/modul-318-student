@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace SwissTransport
@@ -35,7 +36,7 @@ namespace SwissTransport
 
     public class Stations
     {
-        [JsonProperty("stations")]
-        public List<Station> StationList { get; set; }
+      [JsonProperty("stations")]
+      public List<Station> StationList { get; set; }
     }
 }

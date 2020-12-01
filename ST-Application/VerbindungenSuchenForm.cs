@@ -24,7 +24,7 @@ namespace ST_Application
       datePicker.Text = DateTime.Now.ToString("dd.MM.yyyy");
     }
 
-    private void tbxStartLocation_TextChanged(object sender, EventArgs e)
+    private void tbxLocationChanged()
     {
       tbxStartLocation.BackColor = Color.White;
       tbxZielLocation.BackColor = Color.White;
@@ -35,10 +35,26 @@ namespace ST_Application
       else if (abfahrtstafelShown && tbxStartLocation.Text.Length != 0)
       {
         btnSearch.Enabled = true;
-      } else
+      }
+      else
       {
         btnSearch.Enabled = false;
       }
+    }
+
+    private AutoCompleteStringCollection GenerateAutocompleteSource(string query)
+    {
+      AutoCompleteStringCollection source = new AutoCompleteStringCollection();
+      Stations stations = transport.GetStations(query);
+      if (query.Length > 2)
+      {
+        foreach (Station station in stations.StationList)
+        {
+          source.Add(station.Name);
+        }
+      }
+
+      return source;
     }
 
     private void btnSearch_Click(object sender, EventArgs e)
@@ -98,7 +114,7 @@ namespace ST_Application
       dgv.Columns.Add("Ankunftzeit", "Ankunftzeit");
       dgv.Columns.Add("Dauer", "Dauer");
       dgv.Columns.Add("Abfahrtsort", "Abfahrtsort");
-      dgv.Columns.Add("Kante Abfahrtsort", "Kante AbfahrtsortAbfahrtsort");
+      dgv.Columns.Add("Kante Abfahrtsort", "Kante Abfahrtsort");
       dgv.Columns.Add("Ankunftsort", "Ankunftsort");
       dgv.Columns.Add("Kante Ankunftsort", "Kante Ankunftsort");
 
@@ -141,6 +157,7 @@ namespace ST_Application
         btnToggleView.Text = "Abfahrtstafel";
         tbxZielLocation.Enabled = true;
         btnAbfahrtAnkunftToggle.Enabled = true;
+        btnAbfahrtAnkunftToggle_Click(null, null);
       }
     }
 
@@ -156,6 +173,18 @@ namespace ST_Application
         abfahrtAnkunftToggle = 0;
         btnAbfahrtAnkunftToggle.Text = "Abfahrt um";
       }
+    }
+
+    private void tbxStartLocation_TextChanged(object sender, EventArgs e)
+    {
+      tbxStartLocation.AutoCompleteCustomSource = GenerateAutocompleteSource(tbxStartLocation.Text);
+      tbxLocationChanged();
+    }
+
+    private void tbxZielLocation_TextChanged(object sender, EventArgs e)
+    {
+      tbxZielLocation.AutoCompleteCustomSource = GenerateAutocompleteSource(tbxZielLocation.Text);
+      tbxLocationChanged();
     }
   }
 }
