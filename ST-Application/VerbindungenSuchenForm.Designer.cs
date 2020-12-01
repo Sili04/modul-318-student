@@ -29,6 +29,8 @@
     private void InitializeComponent()
     {
       this.spContainer = new System.Windows.Forms.SplitContainer();
+      this.tbxMail = new System.Windows.Forms.TextBox();
+      this.btnSendEmail = new System.Windows.Forms.Button();
       this.btnToggleView = new System.Windows.Forms.Button();
       this.btnSearch = new System.Windows.Forms.Button();
       this.cbSettings = new System.Windows.Forms.ComboBox();
@@ -52,6 +54,7 @@
       this.Kante_Abfahrtsort = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.Ankunftsort = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.Kante_Ankunftsort = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.gbSonstiges = new System.Windows.Forms.GroupBox();
       ((System.ComponentModel.ISupportInitialize)(this.spContainer)).BeginInit();
       this.spContainer.Panel1.SuspendLayout();
       this.spContainer.Panel2.SuspendLayout();
@@ -59,6 +62,7 @@
       this.gbZeitDatum.SuspendLayout();
       this.gbLocation.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
+      this.gbSonstiges.SuspendLayout();
       this.SuspendLayout();
       // 
       // spContainer
@@ -74,9 +78,9 @@
       // spContainer.Panel1
       // 
       this.spContainer.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+      this.spContainer.Panel1.Controls.Add(this.gbSonstiges);
       this.spContainer.Panel1.Controls.Add(this.btnToggleView);
       this.spContainer.Panel1.Controls.Add(this.btnSearch);
-      this.spContainer.Panel1.Controls.Add(this.cbSettings);
       this.spContainer.Panel1.Controls.Add(this.gbZeitDatum);
       this.spContainer.Panel1.Controls.Add(this.gbLocation);
       // 
@@ -87,6 +91,31 @@
       this.spContainer.SplitterDistance = 96;
       this.spContainer.SplitterWidth = 3;
       this.spContainer.TabIndex = 0;
+      // 
+      // tbxMail
+      // 
+      this.tbxMail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.tbxMail.Location = new System.Drawing.Point(6, 45);
+      this.tbxMail.Name = "tbxMail";
+      this.tbxMail.Size = new System.Drawing.Size(131, 20);
+      this.tbxMail.TabIndex = 9;
+      this.tbxMail.Tag = "";
+      this.tbxMail.Text = "Empfänger@example.com";
+      this.tbxMail.TextChanged += new System.EventHandler(this.tbxMail_TextChanged);
+      // 
+      // btnSendEmail
+      // 
+      this.btnSendEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.btnSendEmail.Enabled = false;
+      this.btnSendEmail.Location = new System.Drawing.Point(143, 45);
+      this.btnSendEmail.Name = "btnSendEmail";
+      this.btnSendEmail.Size = new System.Drawing.Size(102, 23);
+      this.btnSendEmail.TabIndex = 8;
+      this.btnSendEmail.Text = "Mailen";
+      this.btnSendEmail.UseVisualStyleBackColor = true;
+      this.btnSendEmail.Click += new System.EventHandler(this.btnSendEmail_Click);
       // 
       // btnToggleView
       // 
@@ -117,7 +146,7 @@
       this.cbSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.cbSettings.FormattingEnabled = true;
-      this.cbSettings.Location = new System.Drawing.Point(458, 32);
+      this.cbSettings.Location = new System.Drawing.Point(73, 18);
       this.cbSettings.Margin = new System.Windows.Forms.Padding(2);
       this.cbSettings.Name = "cbSettings";
       this.cbSettings.Size = new System.Drawing.Size(102, 21);
@@ -273,8 +302,10 @@
             this.Kante_Ankunftsort});
       this.dgv.Location = new System.Drawing.Point(3, 3);
       this.dgv.Name = "dgv";
-      this.dgv.Size = new System.Drawing.Size(833, 349);
+      this.dgv.Size = new System.Drawing.Size(833, 357);
       this.dgv.TabIndex = 0;
+      this.dgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellClick);
+      this.dgv.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellContentClick);
       // 
       // Datum
       // 
@@ -323,6 +354,18 @@
       this.Kante_Ankunftsort.Name = "Kante_Ankunftsort";
       this.Kante_Ankunftsort.ReadOnly = true;
       // 
+      // gbSonstiges
+      // 
+      this.gbSonstiges.Controls.Add(this.cbSettings);
+      this.gbSonstiges.Controls.Add(this.tbxMail);
+      this.gbSonstiges.Controls.Add(this.btnSendEmail);
+      this.gbSonstiges.Location = new System.Drawing.Point(412, 12);
+      this.gbSonstiges.Name = "gbSonstiges";
+      this.gbSonstiges.Size = new System.Drawing.Size(251, 71);
+      this.gbSonstiges.TabIndex = 10;
+      this.gbSonstiges.TabStop = false;
+      this.gbSonstiges.Text = "Sonstiges";
+      // 
       // VerbindungenSuchenForm
       // 
       this.AcceptButton = this.btnSearch;
@@ -342,6 +385,8 @@
       this.gbLocation.ResumeLayout(false);
       this.gbLocation.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
+      this.gbSonstiges.ResumeLayout(false);
+      this.gbSonstiges.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -372,6 +417,9 @@
     private System.Windows.Forms.DataGridViewTextBoxColumn Kante_Ankunftsort;
     private System.Windows.Forms.Button btnMapZielStation;
     private System.Windows.Forms.Button btnMapStartStation;
+    private System.Windows.Forms.Button btnSendEmail;
+    private System.Windows.Forms.TextBox tbxMail;
+    private System.Windows.Forms.GroupBox gbSonstiges;
   }
 }
 

@@ -6,6 +6,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -214,6 +215,11 @@ namespace ST_Application
       OpenStationOnMap(tbxZielLocation.Text);
     }
 
+    private void dgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    {
+      
+    }
+
     private void OpenStationOnMap(string station)
     {
       Stations stations = transport.GetStations(station);
@@ -233,6 +239,43 @@ namespace ST_Application
         string startLocationFormatted = startStations.StationList[0].Name.Replace("/", " ");
         string endLocationFormatted = endStations.StationList[0].Name.Replace("/", " ");
         Process.Start("https://www.google.com/maps/dir/" + startLocationFormatted + "/" + endLocationFormatted);
+      }
+    }
+
+    private void btnSendEmail_Click(object sender, EventArgs e)
+    {
+      string emailText = "";
+      emailText += "Verbindungen: ";
+      foreach (DataGridViewRow row in dgv.SelectedRows)
+      {
+        emailText += "\n";
+        foreach (DataGridViewCell cell in row.Cells)
+        {
+          emailText += cell.Value + "; ";
+        }
+      }
+      Process.Start("mailto: " + "?subject=ÖV-finder" + tbxMail.Text + "&body=" + emailText);
+    }
+
+    private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
+    {
+      BtnSendValidation();
+    }
+
+    private void tbxMail_TextChanged(object sender, EventArgs e)
+    {
+      BtnSendValidation();
+    }
+
+    private void BtnSendValidation()
+    {
+      if (dgv.SelectedRows.Count != 0 && tbxMail.Text.Length != 0)
+      {
+        btnSendEmail.Enabled = true;
+      }
+      else
+      {
+        btnSendEmail.Enabled = false;
       }
     }
   }
