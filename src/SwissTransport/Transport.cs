@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using Newtonsoft.Json;
 
@@ -24,11 +25,12 @@ namespace SwissTransport
             return null;
         }
 
-        public StationBoardRoot GetStationBoard(string station, string id)
+        public StationBoardRoot GetStationBoard(string station, string id, string datetime)
         {
+            Console.WriteLine("HIER------------>>" + datetime);
             station = System.Uri.EscapeDataString(station);
             id = System.Uri.EscapeDataString(id);
-            var request = CreateWebRequest("http://transport.opendata.ch/v1/stationboard?station=" + station + "&id=" + id);
+            var request = CreateWebRequest("http://transport.opendata.ch/v1/stationboard?station=" + station + "&id=" + id + "&datetime=" + datetime);
             var response = request.GetResponse();
             var responseStream = response.GetResponseStream();
 

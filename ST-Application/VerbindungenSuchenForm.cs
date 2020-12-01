@@ -62,7 +62,7 @@ namespace ST_Application
             }
           } else if (abfahrtstafelShown)
           {
-            StationBoardRoot stationBoardRoot = transport.GetStationBoard(tbxStartLocation.Text, "0");
+            StationBoardRoot stationBoardRoot = transport.GetStationBoard(tbxStartLocation.Text, "0", dateTime.ToString("yyyy-MM-dd") + " " + DateTime.Parse(timePicker.Text).ToString("HH:mm"));
             if (stationBoardRoot.Entries.Count != 0)
             {
               UpdateStationBoardData(stationBoardRoot);
