@@ -31,7 +31,6 @@
       this.spContainer = new System.Windows.Forms.SplitContainer();
       this.gbSonstiges = new System.Windows.Forms.GroupBox();
       this.btnShowMap = new System.Windows.Forms.Button();
-      this.cbSettings = new System.Windows.Forms.ComboBox();
       this.tbxMail = new System.Windows.Forms.TextBox();
       this.btnSendEmail = new System.Windows.Forms.Button();
       this.btnToggleView = new System.Windows.Forms.Button();
@@ -56,6 +55,10 @@
       this.Kante_Abfahrtsort = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.Ankunftsort = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.Kante_Ankunftsort = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.gbSettings = new System.Windows.Forms.GroupBox();
+      this.chbZug = new System.Windows.Forms.CheckBox();
+      this.chbBus = new System.Windows.Forms.CheckBox();
+      this.chbSchiff = new System.Windows.Forms.CheckBox();
       ((System.ComponentModel.ISupportInitialize)(this.spContainer)).BeginInit();
       this.spContainer.Panel1.SuspendLayout();
       this.spContainer.Panel2.SuspendLayout();
@@ -64,10 +67,12 @@
       this.gbZeitDatum.SuspendLayout();
       this.gbLocation.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
+      this.gbSettings.SuspendLayout();
       this.SuspendLayout();
       // 
       // spContainer
       // 
+      this.spContainer.AllowDrop = true;
       this.spContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -79,6 +84,7 @@
       // spContainer.Panel1
       // 
       this.spContainer.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+      this.spContainer.Panel1.Controls.Add(this.gbSettings);
       this.spContainer.Panel1.Controls.Add(this.gbSonstiges);
       this.spContainer.Panel1.Controls.Add(this.btnToggleView);
       this.spContainer.Panel1.Controls.Add(this.btnSearch);
@@ -89,7 +95,7 @@
       // 
       this.spContainer.Panel2.Controls.Add(this.dgv);
       this.spContainer.Size = new System.Drawing.Size(836, 449);
-      this.spContainer.SplitterDistance = 96;
+      this.spContainer.SplitterDistance = 127;
       this.spContainer.SplitterWidth = 3;
       this.spContainer.TabIndex = 0;
       // 
@@ -98,37 +104,24 @@
       this.gbSonstiges.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.gbSonstiges.Controls.Add(this.btnShowMap);
-      this.gbSonstiges.Controls.Add(this.cbSettings);
       this.gbSonstiges.Controls.Add(this.tbxMail);
       this.gbSonstiges.Controls.Add(this.btnSendEmail);
       this.gbSonstiges.Location = new System.Drawing.Point(412, 12);
       this.gbSonstiges.Name = "gbSonstiges";
-      this.gbSonstiges.Size = new System.Drawing.Size(251, 71);
+      this.gbSonstiges.Size = new System.Drawing.Size(251, 76);
       this.gbSonstiges.TabIndex = 10;
       this.gbSonstiges.TabStop = false;
       this.gbSonstiges.Text = "Sonstiges";
       // 
       // btnShowMap
       // 
-      this.btnShowMap.Location = new System.Drawing.Point(117, 14);
+      this.btnShowMap.Location = new System.Drawing.Point(6, 14);
       this.btnShowMap.Name = "btnShowMap";
-      this.btnShowMap.Size = new System.Drawing.Size(127, 23);
+      this.btnShowMap.Size = new System.Drawing.Size(238, 23);
       this.btnShowMap.TabIndex = 10;
       this.btnShowMap.Text = "Map öffnen";
       this.btnShowMap.UseVisualStyleBackColor = true;
       this.btnShowMap.Click += new System.EventHandler(this.btnShowMap_Click);
-      // 
-      // cbSettings
-      // 
-      this.cbSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.cbSettings.FormattingEnabled = true;
-      this.cbSettings.Location = new System.Drawing.Point(6, 19);
-      this.cbSettings.Margin = new System.Windows.Forms.Padding(2);
-      this.cbSettings.Name = "cbSettings";
-      this.cbSettings.Size = new System.Drawing.Size(85, 21);
-      this.cbSettings.TabIndex = 5;
-      this.cbSettings.Text = "Settings";
       // 
       // tbxMail
       // 
@@ -149,7 +142,7 @@
       this.btnSendEmail.Enabled = false;
       this.btnSendEmail.Location = new System.Drawing.Point(143, 45);
       this.btnSendEmail.Name = "btnSendEmail";
-      this.btnSendEmail.Size = new System.Drawing.Size(102, 23);
+      this.btnSendEmail.Size = new System.Drawing.Size(102, 25);
       this.btnSendEmail.TabIndex = 8;
       this.btnSendEmail.Text = "Mailen";
       this.btnSendEmail.UseVisualStyleBackColor = true;
@@ -170,7 +163,7 @@
       // 
       this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.btnSearch.Enabled = false;
-      this.btnSearch.Location = new System.Drawing.Point(711, 55);
+      this.btnSearch.Location = new System.Drawing.Point(711, 86);
       this.btnSearch.Margin = new System.Windows.Forms.Padding(2);
       this.btnSearch.Name = "btnSearch";
       this.btnSearch.Size = new System.Drawing.Size(117, 34);
@@ -189,7 +182,7 @@
       this.gbZeitDatum.Margin = new System.Windows.Forms.Padding(2);
       this.gbZeitDatum.Name = "gbZeitDatum";
       this.gbZeitDatum.Padding = new System.Windows.Forms.Padding(2);
-      this.gbZeitDatum.Size = new System.Drawing.Size(184, 74);
+      this.gbZeitDatum.Size = new System.Drawing.Size(184, 78);
       this.gbZeitDatum.TabIndex = 4;
       this.gbZeitDatum.TabStop = false;
       this.gbZeitDatum.Text = "Zeit/Datum";
@@ -240,7 +233,7 @@
       this.gbLocation.Margin = new System.Windows.Forms.Padding(2);
       this.gbLocation.Name = "gbLocation";
       this.gbLocation.Padding = new System.Windows.Forms.Padding(2);
-      this.gbLocation.Size = new System.Drawing.Size(186, 74);
+      this.gbLocation.Size = new System.Drawing.Size(186, 78);
       this.gbLocation.TabIndex = 0;
       this.gbLocation.TabStop = false;
       this.gbLocation.Text = "Ort";
@@ -327,7 +320,7 @@
             this.Kante_Ankunftsort});
       this.dgv.Location = new System.Drawing.Point(3, 3);
       this.dgv.Name = "dgv";
-      this.dgv.Size = new System.Drawing.Size(833, 351);
+      this.dgv.Size = new System.Drawing.Size(833, 321);
       this.dgv.TabIndex = 0;
       this.dgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellClick);
       this.dgv.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellContentClick);
@@ -379,6 +372,54 @@
       this.Kante_Ankunftsort.Name = "Kante_Ankunftsort";
       this.Kante_Ankunftsort.ReadOnly = true;
       // 
+      // gbSettings
+      // 
+      this.gbSettings.Controls.Add(this.chbSchiff);
+      this.gbSettings.Controls.Add(this.chbBus);
+      this.gbSettings.Controls.Add(this.chbZug);
+      this.gbSettings.Location = new System.Drawing.Point(11, 94);
+      this.gbSettings.Name = "gbSettings";
+      this.gbSettings.Size = new System.Drawing.Size(243, 30);
+      this.gbSettings.TabIndex = 11;
+      this.gbSettings.TabStop = false;
+      this.gbSettings.Text = "Einstellungen";
+      // 
+      // chbZug
+      // 
+      this.chbZug.AutoSize = true;
+      this.chbZug.Checked = true;
+      this.chbZug.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.chbZug.Location = new System.Drawing.Point(83, 9);
+      this.chbZug.Name = "chbZug";
+      this.chbZug.Size = new System.Drawing.Size(45, 17);
+      this.chbZug.TabIndex = 0;
+      this.chbZug.Text = "Zug";
+      this.chbZug.UseVisualStyleBackColor = true;
+      // 
+      // chbBus
+      // 
+      this.chbBus.AutoSize = true;
+      this.chbBus.Checked = true;
+      this.chbBus.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.chbBus.Location = new System.Drawing.Point(134, 9);
+      this.chbBus.Name = "chbBus";
+      this.chbBus.Size = new System.Drawing.Size(44, 17);
+      this.chbBus.TabIndex = 1;
+      this.chbBus.Text = "Bus";
+      this.chbBus.UseVisualStyleBackColor = true;
+      // 
+      // chbSchiff
+      // 
+      this.chbSchiff.AutoSize = true;
+      this.chbSchiff.Checked = true;
+      this.chbSchiff.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.chbSchiff.Location = new System.Drawing.Point(184, 9);
+      this.chbSchiff.Name = "chbSchiff";
+      this.chbSchiff.Size = new System.Drawing.Size(53, 17);
+      this.chbSchiff.TabIndex = 2;
+      this.chbSchiff.Text = "Schiff";
+      this.chbSchiff.UseVisualStyleBackColor = true;
+      // 
       // VerbindungenSuchenForm
       // 
       this.AcceptButton = this.btnSearch;
@@ -400,6 +441,8 @@
       this.gbLocation.ResumeLayout(false);
       this.gbLocation.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
+      this.gbSettings.ResumeLayout(false);
+      this.gbSettings.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -415,7 +458,6 @@
     private System.Windows.Forms.Button btnAbfahrtAnkunftToggle;
     private System.Windows.Forms.DateTimePicker datePicker;
     private System.Windows.Forms.Button btnSearch;
-    private System.Windows.Forms.ComboBox cbSettings;
     private System.Windows.Forms.Button btnToggleView;
     private System.Windows.Forms.DataGridView dgv;
     private System.Windows.Forms.DataGridViewTextBoxColumn Datum;
@@ -434,6 +476,10 @@
     private System.Windows.Forms.Button btnShowMap;
     private System.Windows.Forms.ComboBox tbxStartLocation;
     private System.Windows.Forms.ComboBox tbxZielLocation;
+    private System.Windows.Forms.GroupBox gbSettings;
+    private System.Windows.Forms.CheckBox chbSchiff;
+    private System.Windows.Forms.CheckBox chbBus;
+    private System.Windows.Forms.CheckBox chbZug;
   }
 }
 
