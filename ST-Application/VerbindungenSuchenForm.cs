@@ -11,6 +11,7 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Device.Location;
 
 namespace ST_Application
 {
@@ -34,12 +35,16 @@ namespace ST_Application
       PingReply result = null;
       while (result == null)
       {
+        LoadingForm loadingForm = new LoadingForm();
         try
         {
+          loadingForm.Show();
           result = new Ping().Send("google.com", 500);
+          loadingForm.Close();
         }
         catch (Exception)
         {
+          loadingForm.Close();
           DialogResult dialogResult = MessageBox.Show("Sie haben keine Internetverbindung! Bitte stellen Sie eine aktive Verbindung mit dem Internet her.", "Keine Internetverbindung", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
           if (dialogResult == DialogResult.Cancel)
           {
@@ -311,7 +316,25 @@ namespace ST_Application
 
     private void btnShowMap_Click(object sender, EventArgs e)
     {
-      Map.Show();
+      GeoCoordinateWatcher watcher = new GeoCoordinateWatcher();
+
+      string x = watcher.Position.Location.Latitude.ToString();
+      string y = watcher.Position.Location.Longitude.ToString();
+
+        dgv.Rows.Clear();
+        dgv.Columns.Clear();
+        dgv.Columns.Add("Name", "Name");
+        dgv.Columns.Add("Entfernung", "Entfernung");
+        Stations stations = transport.GetNextStations(x, y);
+        foreach (Station station in stations.StationList)
+        {
+          dgv.Rows.Add(new[] { station.Name, station.Distance + "m" });
+        }
+    }
+
+    private void VerbindungenSuchenForm_Load(object sender, EventArgs e)
+    {
+
     }
   }
 }

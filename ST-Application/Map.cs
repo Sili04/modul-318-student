@@ -17,15 +17,14 @@ namespace ST_Application
       Stations stations = transport.GetStations(station);
       if (stations.StationList.Count != 0)
       {
-        string XCoordinate = stations.StationList[0].Coordinate.XCoordinate.ToString().Replace(',', '.');
-        string YCoordinate = stations.StationList[0].Coordinate.YCoordinate.ToString().Replace(',', '.');
-        Process.Start("https://www.google.com/maps/search/" + XCoordinate + "," + YCoordinate);
+        MapForm mapForm = new MapForm(stations.StationList[0].Coordinate.XCoordinate, stations.StationList[0].Coordinate.YCoordinate);
+        mapForm.Show();
       }
     }
 
     public static void Show()
     {
-      Process.Start("https://www.google.com/maps/");
+      
     }
   }
 }

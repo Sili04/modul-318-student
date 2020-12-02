@@ -114,7 +114,7 @@
       this.btnShowMap.Name = "btnShowMap";
       this.btnShowMap.Size = new System.Drawing.Size(238, 23);
       this.btnShowMap.TabIndex = 10;
-      this.btnShowMap.Text = "Map öffnen";
+      this.btnShowMap.Text = "Nächste Stationen anzeigen";
       this.btnShowMap.UseVisualStyleBackColor = true;
       this.btnShowMap.Click += new System.EventHandler(this.btnShowMap_Click);
       // 
@@ -314,7 +314,7 @@
             this.Kante_Ankunftsort});
       this.dgv.Location = new System.Drawing.Point(3, 3);
       this.dgv.Name = "dgv";
-      this.dgv.Size = new System.Drawing.Size(833, 328);
+      this.dgv.Size = new System.Drawing.Size(833, 330);
       this.dgv.TabIndex = 0;
       this.dgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellClick);
       // 
@@ -377,6 +377,7 @@
       this.MinimumSize = new System.Drawing.Size(79, 89);
       this.Name = "VerbindungenSuchenForm";
       this.Text = "ÖV finder - Verbindungen suchen";
+      this.Load += new System.EventHandler(this.VerbindungenSuchenForm_Load);
       this.spContainer.Panel1.ResumeLayout(false);
       this.spContainer.Panel2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.spContainer)).EndInit();
