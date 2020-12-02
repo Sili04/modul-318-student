@@ -29,10 +29,10 @@ namespace SwissTransport
         [TestMethod]
         public void Connections()
         {
-            testee = new Transport();
-            var connections = testee.GetConnections("Sursee", "Luzern", 6, DateTime.Now.ToString("dd.MM.yyyy"), DateTime.Now.ToString("HH:mm"), 0);
+          testee = new Transport();
+          var connections = testee.GetConnections("Sursee", "Luzern", 6, DateTime.Now.ToString("dd.MM.yyyy"), DateTime.Now.ToString("HH:mm"), 0);
 
-            Assert.IsNotNull(connections);
+          Assert.IsNotNull(connections);
         }
     }
 }

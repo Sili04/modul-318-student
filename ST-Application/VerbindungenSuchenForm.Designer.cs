@@ -28,6 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VerbindungenSuchenForm));
       this.spContainer = new System.Windows.Forms.SplitContainer();
       this.gbSonstiges = new System.Windows.Forms.GroupBox();
       this.btnShowMap = new System.Windows.Forms.Button();
@@ -55,10 +56,6 @@
       this.Kante_Abfahrtsort = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.Ankunftsort = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.Kante_Ankunftsort = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.gbSettings = new System.Windows.Forms.GroupBox();
-      this.chbZug = new System.Windows.Forms.CheckBox();
-      this.chbBus = new System.Windows.Forms.CheckBox();
-      this.chbSchiff = new System.Windows.Forms.CheckBox();
       ((System.ComponentModel.ISupportInitialize)(this.spContainer)).BeginInit();
       this.spContainer.Panel1.SuspendLayout();
       this.spContainer.Panel2.SuspendLayout();
@@ -67,7 +64,6 @@
       this.gbZeitDatum.SuspendLayout();
       this.gbLocation.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
-      this.gbSettings.SuspendLayout();
       this.SuspendLayout();
       // 
       // spContainer
@@ -84,7 +80,6 @@
       // spContainer.Panel1
       // 
       this.spContainer.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-      this.spContainer.Panel1.Controls.Add(this.gbSettings);
       this.spContainer.Panel1.Controls.Add(this.gbSonstiges);
       this.spContainer.Panel1.Controls.Add(this.btnToggleView);
       this.spContainer.Panel1.Controls.Add(this.btnSearch);
@@ -249,13 +244,12 @@
       // 
       // tbxStartLocation
       // 
-      this.tbxStartLocation.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+      this.tbxStartLocation.Cursor = System.Windows.Forms.Cursors.Default;
       this.tbxStartLocation.FormattingEnabled = true;
       this.tbxStartLocation.Location = new System.Drawing.Point(46, 21);
       this.tbxStartLocation.Name = "tbxStartLocation";
       this.tbxStartLocation.Size = new System.Drawing.Size(99, 21);
       this.tbxStartLocation.TabIndex = 6;
-      this.tbxStartLocation.UseWaitCursor = true;
       this.tbxStartLocation.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxStartLocation_TextChanged);
       // 
       // btnMapZielStation
@@ -320,10 +314,9 @@
             this.Kante_Ankunftsort});
       this.dgv.Location = new System.Drawing.Point(3, 3);
       this.dgv.Name = "dgv";
-      this.dgv.Size = new System.Drawing.Size(833, 321);
+      this.dgv.Size = new System.Drawing.Size(833, 328);
       this.dgv.TabIndex = 0;
       this.dgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellClick);
-      this.dgv.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellContentClick);
       // 
       // Datum
       // 
@@ -372,54 +365,6 @@
       this.Kante_Ankunftsort.Name = "Kante_Ankunftsort";
       this.Kante_Ankunftsort.ReadOnly = true;
       // 
-      // gbSettings
-      // 
-      this.gbSettings.Controls.Add(this.chbSchiff);
-      this.gbSettings.Controls.Add(this.chbBus);
-      this.gbSettings.Controls.Add(this.chbZug);
-      this.gbSettings.Location = new System.Drawing.Point(11, 94);
-      this.gbSettings.Name = "gbSettings";
-      this.gbSettings.Size = new System.Drawing.Size(243, 30);
-      this.gbSettings.TabIndex = 11;
-      this.gbSettings.TabStop = false;
-      this.gbSettings.Text = "Einstellungen";
-      // 
-      // chbZug
-      // 
-      this.chbZug.AutoSize = true;
-      this.chbZug.Checked = true;
-      this.chbZug.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.chbZug.Location = new System.Drawing.Point(83, 9);
-      this.chbZug.Name = "chbZug";
-      this.chbZug.Size = new System.Drawing.Size(45, 17);
-      this.chbZug.TabIndex = 0;
-      this.chbZug.Text = "Zug";
-      this.chbZug.UseVisualStyleBackColor = true;
-      // 
-      // chbBus
-      // 
-      this.chbBus.AutoSize = true;
-      this.chbBus.Checked = true;
-      this.chbBus.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.chbBus.Location = new System.Drawing.Point(134, 9);
-      this.chbBus.Name = "chbBus";
-      this.chbBus.Size = new System.Drawing.Size(44, 17);
-      this.chbBus.TabIndex = 1;
-      this.chbBus.Text = "Bus";
-      this.chbBus.UseVisualStyleBackColor = true;
-      // 
-      // chbSchiff
-      // 
-      this.chbSchiff.AutoSize = true;
-      this.chbSchiff.Checked = true;
-      this.chbSchiff.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.chbSchiff.Location = new System.Drawing.Point(184, 9);
-      this.chbSchiff.Name = "chbSchiff";
-      this.chbSchiff.Size = new System.Drawing.Size(53, 17);
-      this.chbSchiff.TabIndex = 2;
-      this.chbSchiff.Text = "Schiff";
-      this.chbSchiff.UseVisualStyleBackColor = true;
-      // 
       // VerbindungenSuchenForm
       // 
       this.AcceptButton = this.btnSearch;
@@ -427,6 +372,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(835, 447);
       this.Controls.Add(this.spContainer);
+      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.Margin = new System.Windows.Forms.Padding(2);
       this.MinimumSize = new System.Drawing.Size(79, 89);
       this.Name = "VerbindungenSuchenForm";
@@ -441,8 +387,6 @@
       this.gbLocation.ResumeLayout(false);
       this.gbLocation.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
-      this.gbSettings.ResumeLayout(false);
-      this.gbSettings.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -476,10 +420,6 @@
     private System.Windows.Forms.Button btnShowMap;
     private System.Windows.Forms.ComboBox tbxStartLocation;
     private System.Windows.Forms.ComboBox tbxZielLocation;
-    private System.Windows.Forms.GroupBox gbSettings;
-    private System.Windows.Forms.CheckBox chbSchiff;
-    private System.Windows.Forms.CheckBox chbBus;
-    private System.Windows.Forms.CheckBox chbZug;
   }
 }
 

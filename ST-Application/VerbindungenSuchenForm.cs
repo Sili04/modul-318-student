@@ -16,6 +16,7 @@ namespace ST_Application
   partial class VerbindungenSuchenForm : Form
   {
     Transport transport = new Transport();
+    IntellisenseController intellisenseController = new IntellisenseController();
     bool abfahrtstafelShown = false;
     int abfahrtAnkunftToggle = 0;
 
@@ -42,18 +43,6 @@ namespace ST_Application
       {
         btnSearch.Enabled = false;
       }
-    }
-
-    private List<String> GenerateAutocompleteSource(string query)
-    {
-      List<string> source = new List<string>();
-      Stations stations = transport.GetStations(query);
-      foreach (Station station in stations.StationList)
-      {
-        source.Add(station.Name);
-      }
-
-      return source;
     }
 
     private void btnSearch_Click(object sender, EventArgs e)
@@ -176,7 +165,7 @@ namespace ST_Application
 
     private void tbxStartLocation_TextChanged(object sender, KeyEventArgs e)
     {
-      if (e.KeyCode != Keys.Down && e.KeyCode != Keys.Up && e.KeyCode != Keys.Enter)
+      if (intellisenseController.CalculateFireEvent(e))
       {
         UpdateIntellisenseForStartLocation();
       }
@@ -198,7 +187,7 @@ namespace ST_Application
       {
         tbxStartLocation.Items.RemoveAt(0);
       }
-      List<string> stations = GenerateAutocompleteSource(tbxStartLocation.Text);
+      List<string> stations = intellisenseController.GenerateAutocompleteSource(tbxStartLocation.Text);
       foreach (String station in stations)
       {
         if (station != null)
@@ -211,9 +200,9 @@ namespace ST_Application
 
     private void tbxZielLocation_TextChanged(object sender, KeyEventArgs e)
     {
-      if (e.KeyCode != Keys.Down && e.KeyCode != Keys.Up && e.KeyCode != Keys.Enter)
+      if (intellisenseController.CalculateFireEvent(e))
       {
-        UpdateIntellisenceForZielLocation();
+        UpdateIntellisenseForZielLocation();
       }
 
       if (tbxZielLocation.Text.Length != 0)
@@ -227,14 +216,14 @@ namespace ST_Application
       tbxLocationChanged();
     }
 
-    private void UpdateIntellisenceForZielLocation()
+    private void UpdateIntellisenseForZielLocation()
     {
       while (tbxZielLocation.Items.Count > 0)
       {
         tbxZielLocation.Items.RemoveAt(0);
       }
-      List<string> stations = GenerateAutocompleteSource(tbxStartLocation.Text);
-      foreach (String station in GenerateAutocompleteSource(tbxZielLocation.Text))
+      List<string> stations = intellisenseController.GenerateAutocompleteSource(tbxZielLocation.Text);
+      foreach (String station in stations)
       {
         if (station != null)
         {
@@ -246,31 +235,21 @@ namespace ST_Application
 
     private void btnMapStartStation_Click(object sender, EventArgs e)
     {
-      OpenStationOnMap(tbxStartLocation.Text);
+      Map.Show(tbxStartLocation.Text);
     }
 
     private void btnMapZielStation_Click(object sender, EventArgs e)
     {
-      OpenStationOnMap(tbxZielLocation.Text);
-    }
-
-    private void dgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
-    {
-      
-    }
-
-    private void OpenStationOnMap(string station)
-    {
-      Stations stations = transport.GetStations(station);
-      if (stations.StationList.Count != 0)
-      {
-        string XCoordinate = stations.StationList[0].Coordinate.XCoordinate.ToString().Replace(',', '.');
-        string YCoordinate = stations.StationList[0].Coordinate.YCoordinate.ToString().Replace(',', '.');
-        Process.Start("https://www.google.com/maps/search/" + XCoordinate + "," + YCoordinate);
-      }
+      Map.Show(tbxZielLocation.Text);
     }
 
     private void btnSendEmail_Click(object sender, EventArgs e)
+    {
+      string emailText = GenerateMailText();
+      Process.Start("mailto: " + "?subject=ÖV-finder" + tbxMail.Text + "&body=" + emailText);
+    }
+
+    private string GenerateMailText()
     {
       string emailText = "";
       emailText += "Verbindungen: ";
@@ -282,7 +261,8 @@ namespace ST_Application
           emailText += cell.Value + "; ";
         }
       }
-      Process.Start("mailto: " + "?subject=ÖV-finder" + tbxMail.Text + "&body=" + emailText);
+
+      return emailText;
     }
 
     private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -309,7 +289,7 @@ namespace ST_Application
 
     private void btnShowMap_Click(object sender, EventArgs e)
     {
-      Process.Start("https://www.google.com/maps/");
+      Map.Show();
     }
   }
 }
