@@ -19,6 +19,7 @@ namespace ST_Application
   {
     Transport transport = new Transport();
     IntellisenseController intellisenseController = new IntellisenseController();
+    GeoCoordinateWatcher watcher = new GeoCoordinateWatcher();
     bool abfahrtstafelShown = false;
     int abfahrtAnkunftToggle = 0;
 
@@ -316,20 +317,34 @@ namespace ST_Application
 
     private void btnShowMap_Click(object sender, EventArgs e)
     {
-      GeoCoordinateWatcher watcher = new GeoCoordinateWatcher();
+      GeoCoordinate coord = watcher.Position.Location;
 
-      string x = watcher.Position.Location.Latitude.ToString();
-      string y = watcher.Position.Location.Longitude.ToString();
+      if (coord.IsUnknown != true)
+      {
+        double GeraetX = coord.Latitude;
+        double GeraetY = coord.Longitude;
 
-        dgv.Rows.Clear();
-        dgv.Columns.Clear();
-        dgv.Columns.Add("Name", "Name");
-        dgv.Columns.Add("Entfernung", "Entfernung");
-        Stations stations = transport.GetNextStations(x, y);
-        foreach (Station station in stations.StationList)
+        try
         {
-          dgv.Rows.Add(new[] { station.Name, station.Distance + "m" });
+          Stations stations = transport.GetNextStations(Convert.ToString(GeraetX), Convert.ToString(GeraetY));
+          dgv.Rows.Clear();
+          dgv.Columns.Clear();
+          dgv.Columns.Add("Name", "Name");
+          dgv.Columns.Add("Entfernung", "Entfernung");
+
+          foreach (Station station in stations.StationList.Take(5))
+          {
+            dgv.Rows.Add(new[] { station.Name, station.Distance + "m" });
+          }
+          this.Refresh();
         }
+        catch { MessageBox.Show("Es wurden keine Staionen gefunden."); return; }
+      }
+      else
+      {
+        MessageBox.Show("Die Koordinaten konnten nicht ermittelt werden.");
+        System.Threading.Thread.Sleep(1000);
+      }
     }
 
     private void VerbindungenSuchenForm_Load(object sender, EventArgs e)
