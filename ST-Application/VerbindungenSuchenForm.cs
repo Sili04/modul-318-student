@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net.Mail;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,6 +26,27 @@ namespace ST_Application
       InitializeComponent();
       timePicker.Text = DateTime.Now.ToString("HH:mm");
       datePicker.Text = DateTime.Now.ToString("dd.MM.yyyy");
+      CheckConnection();
+    }
+
+    private void CheckConnection()
+    {
+      PingReply result = null;
+      while (result == null)
+      {
+        try
+        {
+          result = new Ping().Send("google.com", 500);
+        }
+        catch (Exception)
+        {
+          DialogResult dialogResult = MessageBox.Show("Sie haben keine Internetverbindung! Bitte stellen Sie eine aktive Verbindung mit dem Internet her.", "Keine Internetverbindung", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+          if (dialogResult == DialogResult.Cancel)
+          {
+            Environment.Exit(0);
+          }
+        }
+      }
     }
 
     private void tbxLocationChanged()

@@ -12,19 +12,26 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		ÖV-finder|Any CPU = ÖV-finder|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D0262178-A48F-4DE0-807B-E76B63E39421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D0262178-A48F-4DE0-807B-E76B63E39421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0262178-A48F-4DE0-807B-E76B63E39421}.ÖV-finder|Any CPU.ActiveCfg = ÖV-finder|Any CPU
+		{D0262178-A48F-4DE0-807B-E76B63E39421}.ÖV-finder|Any CPU.Build.0 = ÖV-finder|Any CPU
 		{D0262178-A48F-4DE0-807B-E76B63E39421}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0262178-A48F-4DE0-807B-E76B63E39421}.Release|Any CPU.Build.0 = Release|Any CPU
 		{959C6E54-5B1C-40F5-938A-C57B17451421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{959C6E54-5B1C-40F5-938A-C57B17451421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{959C6E54-5B1C-40F5-938A-C57B17451421}.ÖV-finder|Any CPU.ActiveCfg = ÖV-finder|Any CPU
+		{959C6E54-5B1C-40F5-938A-C57B17451421}.ÖV-finder|Any CPU.Build.0 = ÖV-finder|Any CPU
 		{959C6E54-5B1C-40F5-938A-C57B17451421}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{959C6E54-5B1C-40F5-938A-C57B17451421}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B296B7ED-CDA8-4695-823C-324A6A908D95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B296B7ED-CDA8-4695-823C-324A6A908D95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B296B7ED-CDA8-4695-823C-324A6A908D95}.ÖV-finder|Any CPU.ActiveCfg = ÖV-finder|Any CPU
+		{B296B7ED-CDA8-4695-823C-324A6A908D95}.ÖV-finder|Any CPU.Build.0 = ÖV-finder|Any CPU
 		{B296B7ED-CDA8-4695-823C-324A6A908D95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B296B7ED-CDA8-4695-823C-324A6A908D95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection

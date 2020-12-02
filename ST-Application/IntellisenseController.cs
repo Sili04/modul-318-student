@@ -35,7 +35,10 @@ namespace ST_Application
         {
           source.Add(station.Name);
         }
-        source.Add("");
+        if (source.Count == 0)
+        {
+          source.Add("Keine Ergebnisse");
+        }
       }
       catch (Exception)
       {
