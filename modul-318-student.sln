@@ -9,6 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwissTransportTest", "tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ST-Application", "ST-Application\ST-Application.csproj", "{B296B7ED-CDA8-4695-823C-324A6A908D95}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installer", "Installer", "{90F25E4C-1152-4C4D-9F02-ADFD9F65AF8C}"
+	ProjectSection(SolutionItems) = preProject
+		..\Installer\Setup Files\OeV-finder.msi = ..\Installer\Setup Files\OeV-finder.msi
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
